@@ -2,9 +2,9 @@
 
 Reading an agent's own account of what it did is the expensive part - that is
 where the babysitting time goes, and a confident report can be wrong in both
-directions (it once called a finished step a failure, and once called a stale
-2024 record its target). This scores the run the only way that cannot be talked
-around: what actually changed in the database.
+directions (it once called a finished step a failure, and once called a record
+over a year old its target). This scores the run the only way that cannot be
+talked around: what actually changed in the database.
 
     python verify.py snapshot --order <订单号>      # before handing over
     ...agent works, unattended...
@@ -103,8 +103,8 @@ def pipeline(order):
 def footprint(owner, since):
     """Everything this account changed since the snapshot, order number attached.
 
-    Scoped to the automation's own user id so the nightly batch jobs - which
-    touch thousands of shipping rows at 06:18 - do not drown the signal.
+    Scoped to the automation's own user id so nightly batch jobs - which can
+    touch thousands of shipping rows in one go - do not drown the signal.
     """
     sql = f"""
     SELECT 'order'  AS obj, TO_CHAR(order_number) AS ref,

@@ -1,8 +1,8 @@
 """Read-only access to the EBS database.
 
-Three layers of protection, because the account itself is not fully read-only —
-`SELECT ... FOR UPDATE` succeeds with it, which can block real users by holding
-row locks:
+Three layers of protection, because an account granted only SELECT is still not
+fully read-only — `SELECT ... FOR UPDATE` succeeds with it, and holding row
+locks can block real users:
 
   1. every session issues ALTER SESSION SET READ ONLY, so the database itself
      refuses writes and locks
@@ -24,8 +24,9 @@ import oracledb
 CONFIG_PATH = Path(os.environ.get(
     "EBS_DB_CONFIG", Path.home() / ".ebs" / "connections.json"))
 
-# The pure-Python thin mode cannot handle this instance's password verifier
-# (0x939), so an Oracle client library is required. PL/SQL Developer ships one.
+# The pure-Python thin mode cannot handle the older password verifiers (0x939)
+# that EBS databases often still carry, so an Oracle client library is needed.
+# PL/SQL Developer ships one, hence this default - change it to wherever yours is.
 DEFAULT_LIB = r"C:\Program Files\PLSQL Developer 13\instantclient_21_3"
 
 _initialised = False

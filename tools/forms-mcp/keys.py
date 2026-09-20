@@ -252,9 +252,9 @@ def type_text(text: str, per_char_delay=0.006):
 # clipboard
 #
 # Pasting beats typing for Forms fields: one atomic write instead of N
-# keystrokes, nothing for an IME to intercept (which matters for the non-ASCII
-# customer names in this instance), and no chance of a half-entered value if
-# something interrupts partway.
+# keystrokes, nothing for an IME to intercept (which matters wherever a field
+# can hold non-ASCII text), and no chance of a half-entered value if something
+# interrupts partway.
 # --------------------------------------------------------------------------
 CF_UNICODETEXT = 13
 GMEM_MOVEABLE = 0x0002
