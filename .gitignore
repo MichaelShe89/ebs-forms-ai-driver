@@ -49,6 +49,15 @@ o2c_state.json
 # new form; they capture a moment, not a method, and are noise in a repo.
 _*.py
 
+# Ad-hoc queries and their output. `ebsql.py -f query.sql` invites saving these
+# next to the tool, and a real query carries real record ids, customer names and
+# org ids - the exact things that must not leave your instance. Nothing shipped
+# here is a .sql or .csv file, so anything matching is yours, not the project's.
+# If you ever do want to version one, `git add -f` it deliberately.
+*.sql
+*.csv
+*.tsv
+
 # ---------------------------------------------------------------------------
 # OS / editor
 # ---------------------------------------------------------------------------
