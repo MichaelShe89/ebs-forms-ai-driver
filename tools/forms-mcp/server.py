@@ -270,14 +270,17 @@ def forms_type(node_id: int, text: str, clear_first: bool = True,
 
       method="paste"      (default) sets the clipboard and triggers Forms'
                           own Edit > Paste through JAB. No keystrokes, so an
-                          IME cannot mangle non-ASCII text, and the value lands
-                          in one step.
-      method="keystrokes" sends the characters one at a time.
+                          IME cannot mangle non-ASCII text, the value lands in
+                          one step, and the operator keeps their keyboard.
+                          It does overwrite the clipboard.
+      method="keystrokes" sends the characters one at a time. THIS FRONTS THE
+                          WINDOW AND TAKES THE OPERATOR'S KEYBOARD. Only ask
+                          for it when nobody is at the machine.
 
-    Paste falls back to keystrokes if Forms declines it; `method_used` says
-    which one actually delivered the value. Requires the Forms window in the
-    foreground either way — it is fronted automatically, and the call fails
-    rather than typing into whatever window is in front.
+    Paste does NOT fall back to keystrokes. Falling back would quietly turn a
+    background call into one that grabs the foreground, so a declined paste is
+    reported instead and the choice is left to the caller. `method_used` says
+    which one delivered the value, or "none" if neither did.
     """
     h = _resolve_hwnd(hwnd)
     n = jab.node_by_id(h, node_id)
@@ -306,19 +309,6 @@ def forms_type(node_id: int, text: str, clear_first: bool = True,
                                "if that is acceptable)",
                 "focus_ok": focus_ok,
             }
-        if False:
-            method_used = "keystrokes"
-            keys.require_foreground(h)
-            fresh = jab.call(lambda: jab.snapshot(h), timeout=120)
-            again = next((x for x in fresh if x.name == field_name
-                          and x.x == fx and x.y == fy), None)
-            if again is not None:
-                jab.call(lambda: bool(jab.bridge.requestFocus(again.vmid, again.ac)))
-                jab.settle(0.3)
-            if clear_first:
-                keys.press("ctrl+a")
-                keys.press("delete")
-            keys.type_text(text)
     else:
         keys.require_foreground(h)
         if clear_first:

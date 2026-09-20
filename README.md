@@ -72,7 +72,7 @@ the agent, attaches it, and verifies the handshake.
 ```
 setup.ps1                      One-command setup.   ← start here
 SECURITY.md                    Threat model and operator responsibilities
-EBS-AI-Forms-自动化方案.md      The full manual (Chinese) — written for the AI assistant
+MANUAL.zh-CN.md                The full manual (Chinese) — written for the AI assistant
 tools/ebs-db/
   ├─ ebsql.py                  Run a SELECT from the command line (read-only)
   ├─ verify.py                 Score an unattended run against the database
@@ -139,7 +139,7 @@ desktop. It will not steal your focus, but it is not invisible either.
 Give the assistant the manual and let it use the tools. Two things are worth
 knowing before you start.
 
-**Read the troubleshooting method first.** The manual has 39 catalogued failures
+**Read the troubleshooting method first.** The manual has 38 catalogued failures
 and 12 dead ends, but §14 — *how to debug something not in the catalogue* — is
 more valuable than either. You will hit something undocumented.
 

@@ -7,7 +7,6 @@
 > 动手前请先读 [SECURITY.md](SECURITY.md)。
 >
 > 英文版见 [README.md](README.md)。
-# EBS 界面自动化 —— 从这里开始
 
 让 AI 通过 Oracle EBS Forms 的界面做设置和测试，**不抢鼠标键盘**，客制化校验照常触发。
 
@@ -41,7 +40,7 @@
 
 ## 给 AI 助手看的
 
-把 **`EBS-AI-自动化手册.md`** 整份发给你的 AI 助手，并在手册 §15 填上环境信息和具体任务。
+把 **`MANUAL.zh-CN.md`** 整份发给你的 AI 助手，并在手册 §15 填上环境信息和具体任务。
 
 助手拿到后应当：
 
@@ -49,7 +48,7 @@
 2. **先读 §14 排查方法** —— 比故障字典更重要。字典是别人踩过的坑，
    §14 是你自己踩新坑时该怎么走。你一定会遇到手册没写的问题，
    能不能自己走出来取决于 §14；
-3. 再通读 **§7 故障字典（36 条）** 和 **§8 死路清单（12 条）**；
+3. 再通读 **§7 故障字典（38 条）** 和 **§8 死路清单（12 条）**；
 4. 遇到问题**先查字典**，不要自己写探针程序去试探沙箱边界。
 
 > **最重要的一条：不要另起炉灶写最小 agent 去探测。**
@@ -63,10 +62,17 @@
 
 ```
 setup.ps1                 一键落地脚本。【入口】
-README.md                 本文件
-EBS-AI-自动化手册.md       完整方法论 + 全部源码 + 故障字典。给 AI 看的
+README.zh-CN.md           本文件
+README.md                 英文版
+SECURITY.md               威胁模型与使用者责任。动手前先读
+MANUAL.zh-CN.md           完整方法论 + 全部源码 + 故障字典。给 AI 看的
+tools/ebs-db/
+├─ ebsql.py               命令行跑 SELECT（只读）
+├─ verify.py              拿数据库给一次无人值守的运行打分
+└─ db.py                  连接管理与语句审查
 tools/forms-mcp/
 ├─ jab.py bg.py server.py keys.py navigate.py     基础设施（读界面）
+├─ server.py              把读的那一半暴露成 MCP 工具
 ├─ agent/                 注入用的 Java agent 源码
 │  ├─ Attach.java
 │  └─ src/si/{Loader,Driver}.java
@@ -76,7 +82,7 @@ tools/forms-mcp/
    ├─ nav.py flow.py witness.py cdp.py
 ```
 
-**解压后不要拆散目录结构**，`drive.py` 靠相对路径找上级模块。
+**不要拆散目录结构**，`drive.py` 靠相对路径找上级模块。
 
 ---
 
