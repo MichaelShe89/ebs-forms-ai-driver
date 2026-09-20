@@ -139,7 +139,7 @@ desktop. It will not steal your focus, but it is not invisible either.
 Give the assistant the manual and let it use the tools. Two things are worth
 knowing before you start.
 
-**Read the troubleshooting method first.** The manual has 38 catalogued failures
+**Read the troubleshooting method first.** The manual has 39 catalogued failures
 and 12 dead ends, but §14 — *how to debug something not in the catalogue* — is
 more valuable than either. You will hit something undocumented.
 
