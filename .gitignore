@@ -1,0 +1,61 @@
+# ---------------------------------------------------------------------------
+# Secrets — never commit. A leaked token here means anyone on the machine can
+# drive a logged-in ERP session; a leaked connections.json means database
+# credentials. Both are listed first because both are unrecoverable once pushed.
+# ---------------------------------------------------------------------------
+secret.txt
+**/agent/drive/
+connections.json
+*.pem
+*.key
+.env
+.env.*
+
+# ---------------------------------------------------------------------------
+# Build output — the agent jar is rebuilt on every run by design (a stale jar
+# is the single most confusing failure mode this project has), so it must never
+# be committed or reused.
+# ---------------------------------------------------------------------------
+*.jar
+*.class
+classes/
+manifest.txt
+javac.log
+attach.log
+
+# ---------------------------------------------------------------------------
+# Python
+# ---------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ---------------------------------------------------------------------------
+# Local run artefacts
+# ---------------------------------------------------------------------------
+*.log
+*.out
+*_log.txt
+o2c_state.json
+.ebs/
+
+# Ad-hoc scratch scripts. Exploratory one-offs accumulate fast while working a
+# new form; they capture a moment, not a method, and are noise in a repo.
+_*.py
+
+# ---------------------------------------------------------------------------
+# OS / editor
+# ---------------------------------------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp
+*~
